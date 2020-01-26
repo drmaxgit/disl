@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Karel Hübl <karel.huebl@gmail.com>.
+ * Copyright 2015 Karel Hï¿½bl <karel.huebl@gmail.com>.
  *
  * This file is part of disl.
  *
@@ -25,10 +25,9 @@ apply plugin: 'eclipse'
 apply plugin: 'groovy'
 apply plugin: 'java-library-distribution'
 apply plugin: 'maven'
-apply plugin: 'signing'
 
-project.group='com.github.kaja78'
-project.version="1.1.3-SNAPSHOT"
+project.group='com.drmax'
+project.version="1.0-SNAPSHOT"
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -69,32 +68,20 @@ artifacts {
 	archives groovydocJar, sourcesJar
 }
 
-
-signing {
-	sign configurations.archives
-}
-
-String getVersionName() {
-	'git describe --tags'.execute(null,project.projectDir).text.trim()
-}
-
-
 uploadArchives {
 	repositories {
 		mavenDeployer {
-			snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-				authentication(userName: sonatypeUser, password: sonatypePassword)
+			snapshotRepository(url: "https://apps.prod.dwh.drmax.global/nexus/repository/dwh-drmax-snapshot/") {
+				authentication(userName: drmaxNexusUser, password: drmaxNexusPassword)
 			}
-			
-			beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-			repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-				authentication(userName: sonatypeUser, password: sonatypePassword)
+			repository(url: "https://apps.prod.dwh.drmax.global/nexus/repository/dwh-drmax-release/") {
+				authentication(userName: drmaxNexusUser, password: drmaxNexusPassword)
 			}
 		
 			pom.project {
 				name 'disl'
 				description 'disl = data integration specific language. Goal of this project is to implement groovy based domain specific language supporting modelling of data integration projects. Disl will support data modeling and data mapping including support for MDA transformations and unit testing.'
-				url 'https://github.com/kaja78/disl'
+				url 'https://github.com/drmaxgit/disl'
 				licenses {
 					license {
 						name 'GNU GENERAL PUBLIC LICENSE, Version 3.0'
@@ -104,15 +91,15 @@ uploadArchives {
 				}
 				developers {
 					developer {
-						name 'Karel Hübl'
+						name 'Karel Hï¿½bl'
 						email 'karel.huebl@gmail.com'
-						organization 'Karel Hübl'
+						organization 'Karel Hï¿½bl'
 						organizationUrl 'https://github.com/kaja78'						
 					}
 				}
 				issueManagement {
-					system 'Github'
-					url 'https://github.com/kaja78/disl/issues'					
+					system 'JIRA'
+					url 'https://mydrmax.atlassian.net/secure/RapidBoard.jspa?projectKey=DWHAGILE'
 				}
 				scm {
 					connection 'scm:git:git@github.com:kaja78/disl.git'
