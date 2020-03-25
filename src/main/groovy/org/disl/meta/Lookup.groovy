@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 - 2016 Karel Hübl <karel.huebl@gmail.com>.
+ * Copyright 2015 - 2016 Karel Hï¿½bl <karel.huebl@gmail.com>.
  *
  * This file is part of disl.
  *
@@ -87,7 +87,17 @@ abstract class Lookup extends MappingSource {
 	}
 
 	protected List<Map> createRecordsFromList() {
-		List<List> recordList=getRecords()
+		def recordList = records
+		def result = recordList.collect {
+			values -> def record = new LinkedHashMap()
+				columns.each {
+					column -> (record[column.name] = values[columns.indexOf(column)])
+				}
+				record
+		}
+		result as List<Map>
+
+		/*List<List> recordList=getRecords()
 		List<Map> result=(List<Map>)recordList.collect { values->
 			Map record=new LinkedHashMap()
 			columns.each {column ->
@@ -95,7 +105,7 @@ abstract class Lookup extends MappingSource {
 			}
 			return record
 		}
-		return result
+		return result*/
 	}
 
 	@Override

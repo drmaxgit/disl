@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 - 2016 Karel Hübl <karel.huebl@gmail.com>.
+ * Copyright 2015 - 2016 Karel Hï¿½bl <karel.huebl@gmail.com>.
  *
  * This file is part of disl.
  *
@@ -18,20 +18,17 @@
  */
 package org.disl.pattern
 
-import groovy.sql.Sql
-import groovy.transform.CompileStatic;
-
-import org.disl.meta.Context
+import groovy.transform.CompileStatic
 import org.disl.meta.Table
 
 /**
  * Pattern for Table.
  * */
 @CompileStatic
-abstract class TablePattern<T extends Table> extends Pattern {
-	T table
+abstract class TablePattern<TGT extends Table> extends Pattern {
+	TGT table
 	
-	final T getTable() {
+	final TGT getTable() {
 		table
 	}
 	
