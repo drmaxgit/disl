@@ -25,19 +25,15 @@ import org.disl.meta.Table
  * Pattern for Table.
  * */
 @CompileStatic
-abstract class TablePattern<TGT extends Table> extends Pattern {
-	TGT table
-	
-	final TGT getTable() {
-		table
-	}
-	
-	void addSqlScriptStep(String name,String code) {
-		add(ExecuteSQLScriptTableStep.create(name, code))
-	}
+abstract class TablePattern<T extends Table> extends Pattern {
+    T table
 
-	@Override
-	public String toString() {
-		"${this.getClass().getSimpleName()}(${getTable()})"
-	}
+    void addSqlScriptStep(String name, String code) {
+        add(ExecuteSQLScriptTableStep.create(name, code))
+    }
+
+    @Override
+    public String toString() {
+        "${this.getClass().getSimpleName()}(${getTable()})"
+    }
 }
